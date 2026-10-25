@@ -1,0 +1,512 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Brand palette */
+  --color-espresso:  #2c1a0e;
+  --color-roast:     #5c3317;
+  --color-caramel:   #c8813a;
+  --color-cream:     #fdf6ee;
+  --color-muted:     #6b5744;
+  --color-white:     #ffffff;
+  --color-focus:     #0057d8;   /* high-contrast focus ring colour */
+
+  /* Typography */
+  --font-heading: 'Georgia', serif;
+  --font-body:    system-ui, -apple-system, sans-serif;
+
+  /* Spacing scale */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+
+  /* Misc */
+  --radius:       0.5rem;
+  --shadow:       0 4px 16px rgba(44, 26, 14, 0.12);
+  --transition:   0.2s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-espresso);
+  line-height: 1.7;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* ── 2. BASE TYPOGRAPHY ────────────────────────────────────── */
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--color-espresso);
+  line-height: 1.25;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); margin-bottom: var(--space-sm); }
+h3 { font-size: 1.15rem; margin-bottom: var(--space-xs); }
+
+p  { margin-bottom: var(--space-xs); }
+
+section {
+  padding: var(--space-lg) var(--space-md);
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+.section-sub {
+  color: var(--color-muted);
+  margin-bottom: var(--space-md);
+}
+
+
+/* ── 3. SKIP LINK (accessibility) ──────────────────────────── */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-sm);
+  background: var(--color-espresso);
+  color: var(--color-white);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius);
+  z-index: 999;
+  font-weight: 700;
+  transition: top var(--transition);
+}
+
+.skip-link:focus {
+  top: var(--space-sm);
+}
+
+
+
+
+.site-header {
+  position: sticky;        /* sticks to the top while scrolling */
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-espresso);
+  color: var(--color-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.header-inner {
+  display: flex;                     /* single-axis row layout */
+  align-items: center;               /* vertically centre logo & links */
+  justify-content: space-between;    /* push brand left, nav right */
+  max-width: 1100px;
+  margin-inline: auto;
+  padding: var(--space-sm) var(--space-md);
+  gap: var(--space-sm);
+}
+
+.brand {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-caramel);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+nav ul {
+  display: flex;           /* nav items in a row */
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: var(--color-cream);
+  font-weight: 600;
+  padding: var(--space-xs) 0.25rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color var(--transition), color var(--transition);
+}
+
+nav a:hover {
+  color: var(--color-caramel);
+  border-bottom-color: var(--color-caramel);
+}
+
+
+/* ── ORDER COUNTER (header) ────────────────────────────────── */
+
+#order-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--color-roast);
+  color: var(--color-cream);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  /* Subtle pulse animation plays whenever JS adds the .bump class */
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+#order-counter.bump {
+  transform: scale(1.18);
+  background-color: var(--color-caramel);
+}
+
+#order-count {
+  font-size: 1rem;
+}
+
+/* ── ADD TO ORDER BUTTON (.btn-order) ──────────────────────── */
+
+.btn-order {
+  display: block;
+  width: 100%;
+  margin-top: var(--space-xs);
+  padding: 0.55rem var(--space-sm);
+  background-color: transparent;
+  color: var(--color-roast);
+  border: 2px solid var(--color-roast);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: background-color var(--transition), color var(--transition),
+              transform var(--transition);
+}
+
+.btn-order:hover {
+  background-color: var(--color-roast);
+  color: var(--color-white);
+  transform: translateY(-1px);
+}
+
+/* ── 5. HERO SECTION ───────────────────────────────────────── */
+
+#hero {
+  position: relative;
+  max-width: 100%;       /* hero spans full width */
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  min-height: 520px;
+}
+
+.hero-img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.55);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-md);
+  color: var(--color-white);
+}
+
+.hero-overlay h1 {
+  color: var(--color-white);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  margin-bottom: var(--space-xs);
+}
+
+.hero-overlay p {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-md);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.btn-primary {
+  display: inline-block;
+  background-color: var(--color-caramel);
+  color: var(--color-white);
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius);
+  font-weight: 700;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-roast);
+  transform: translateY(-2px);
+}
+
+
+/* ── 6. ABOUT SECTION ──────────────────────────────────────── */
+
+#about {
+  background-color: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-block: var(--space-md);
+}
+
+#about p {
+  max-width: 70ch;
+  color: var(--color-muted);
+}
+
+
+/* ── 7. MENU SECTION & CSS GRID ────────────────────────────── */
+
+
+
+#menu {
+  background-color: var(--color-cream);
+}
+
+#menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+
+/* ── 8. MENU CARD & BESTSELLER BADGE ───────────────────────── */
+
+.menu-card {
+  position: relative;          /* establishes stacking context for badge */
+  background-color: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.menu-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(44, 26, 14, 0.18);
+}
+
+.menu-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: var(--space-sm);
+}
+
+.card-body .desc {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-xs);
+}
+
+
+.badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background-color: var(--color-caramel);
+  color: var(--color-white);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+
+/* ── 9. SPECIFICITY DEMO — #price / .amount / p.amount ─────── */
+
+
+
+#price          { color: green; }     /* specificity: 1-0-0 → wins */
+.menu .amount   { color: red;   }     /* specificity: 0-2-0 → loses */
+p.amount        { color: blue;  }     /* specificity: 0-1-1 → loses */
+
+
+/* ── 10. CONTACT FORM ──────────────────────────────────────── */
+
+#contact {
+  background-color: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-block: var(--space-md);
+}
+
+#contact p {
+  color: var(--color-muted);
+  margin-bottom: var(--space-md);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  max-width: 580px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-espresso);
+}
+
+label span {
+  color: var(--color-caramel);
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.65rem var(--space-sm);
+  border: 2px solid #d6c4b0;
+  border-radius: var(--radius);
+  background-color: var(--color-cream);
+  color: var(--color-espresso);
+  transition: border-color var(--transition);
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+textarea:hover {
+  border-color: var(--color-caramel);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+form .btn-primary {
+  align-self: flex-start;
+}
+
+
+/* ── 11. FOOTER ────────────────────────────────────────────── */
+
+footer {
+  background-color: var(--color-espresso);
+  color: var(--color-cream);
+  text-align: center;
+  padding: var(--space-md);
+  font-size: 0.9rem;
+  line-height: 2;
+}
+
+footer address {
+  font-style: normal;
+  color: var(--color-caramel);
+}
+
+footer a {
+  color: var(--color-caramel);
+  text-decoration: underline;
+}
+
+footer a:hover {
+  color: var(--color-white);
+}
+
+
+/* ── 12. FOCUS-VISIBLE OUTLINES (accessibility) ────────────── */
+
+/*
+  :focus-visible ensures a clear keyboard-focus ring appears on
+  ALL interactive elements only when navigating via keyboard
+  (not on mouse click), meeting WCAG 2.4.7 & 2.4.11 requirements.
+*/
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Remove default browser outline so our custom one is the sole ring */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+
+/* ── 13. RESPONSIVE — below 768px ──────────────────────────── */
+
+@media (max-width: 768px) {
+
+  /* Stack the navbar vertically on small screens */
+  .header-inner {
+    flex-direction: column;      /* switch from row → column */
+    align-items: flex-start;
+    padding: var(--space-sm);
+  }
+
+  nav ul {
+    flex-direction: column;      /* nav links stack vertically */
+    gap: var(--space-xs);
+    width: 100%;
+  }
+
+  nav a {
+    display: block;
+    padding: var(--space-xs) 0;
+  }
+
+  #order-counter {
+    align-self: flex-start;      /* left-align counter below nav on mobile */
+  }
+
+  .hero-img {
+    height: 320px;
+  }
+
+  section {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  form .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+}

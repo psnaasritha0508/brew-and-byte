@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Brew & Byte — A cozy café where great coffee meets great code."
+    />
+    <title>Brew &amp; Byte Café</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- ===================== STICKY HEADER + NAV ===================== -->
+    <header class="site-header">
+      <a href="#main-content" class="skip-link">Skip to main content</a>
+
+      <div class="header-inner">
+        <a href="#" class="brand" aria-label="Brew &amp; Byte – home">
+          ☕ Brew &amp; Byte
+        </a>
+
+        <!-- Flexbox chosen for the nav (see style.css comment) -->
+        <nav aria-label="Primary navigation">
+          <ul role="list">
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Live order counter — updated by app.js via event delegation -->
+        <output id="order-counter" aria-live="polite" aria-atomic="true">
+          🛒 Items in order: <strong id="order-count">0</strong>
+        </output>
+      </div>
+    </header>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main id="main-content">
+      <!-- ── HERO ── -->
+      <section id="hero" aria-labelledby="hero-heading">
+        <img
+          src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1400&q=80"
+          alt="Overhead shot of a flat-white coffee with latte art in a white ceramic cup, surrounded by coffee beans on a wooden table"
+          class="hero-img"
+        />
+        <div class="hero-overlay">
+          <h1 id="hero-heading">Where Coffee Meets Code</h1>
+          <p>Artisan brews &amp; byte-sized bites in the heart of the city.</p>
+          <a href="#menu" class="btn-primary">Explore Our Menu</a>
+        </div>
+      </section>
+
+      <!-- ── ABOUT ── -->
+      <section id="about" aria-labelledby="about-heading">
+        <h2 id="about-heading">Our Story</h2>
+        <p>
+          Brew &amp; Byte was born in 2019 from a simple idea: every great
+          hackathon deserves great coffee. We source single-origin beans from
+          ethical farms, roast them in-house, and pair them with freshly baked
+          pastries — all inside a welcoming space built for makers, thinkers,
+          and caffeine enthusiasts.
+        </p>
+        <p>
+          Whether you're debugging a tricky function or catching up with a
+          friend, our baristas are ready to fuel your session.
+        </p>
+      </section>
+
+      <!-- ── MENU ── -->
+      <section id="menu" aria-labelledby="menu-heading">
+        <h2 id="menu-heading">Our Menu</h2>
+        <p class="section-sub">Hand-crafted with love (and a lot of caffeine).</p>
+
+        <!-- CSS Grid chosen for #menu-grid (see style.css comment) -->
+        <div id="menu-grid" role="list">
+
+          <!-- CARD 1 – Bestseller -->
+          <article class="menu-card bestseller" aria-label="Espresso Classico – Bestseller" role="listitem">
+            <span class="badge" aria-label="Bestseller">⭐ Bestseller</span>
+            <img
+              src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400&q=80"
+              alt="A double-shot espresso in a small white demitasse cup with a golden crema on top"
+            />
+            <div class="card-body">
+              <h3>Espresso Classico</h3>
+              <p class="desc">Rich, bold, and brewed to perfection — the purist's pick.</p>
+              <p id="price" class="amount">$4.50</p>
+              <button type="button" class="btn-order" data-item="Espresso Classico">
+                Add to order
+              </button>
+            </div>
+          </article>
+
+          <!-- CARD 2 -->
+          <article class="menu-card" aria-label="Cold Brew Float" role="listitem">
+            <img
+              src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=80"
+              alt="A tall glass of cold brew coffee topped with a scoop of vanilla ice cream and caramel drizzle"
+            />
+            <div class="card-body">
+              <h3>Cold Brew Float</h3>
+              <p class="desc">12-hour steeped cold brew crowned with vanilla soft-serve.</p>
+              <p class="amount">$6.00</p>
+              <button type="button" class="btn-order" data-item="Cold Brew Float">
+                Add to order
+              </button>
+            </div>
+          </article>
+
+          <!-- CARD 3 -->
+          <article class="menu-card" aria-label="Matcha Cloud Latte" role="listitem">
+            <img
+              src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=400&q=80"
+              alt="A vibrant green matcha latte in a clear glass with a frothy milk cloud on top, served on a wooden coaster"
+            />
+            <div class="card-body">
+              <h3>Matcha Cloud Latte</h3>
+              <p class="desc">Ceremonial-grade matcha whisked into silky oat milk foam.</p>
+              <p class="amount">$5.75</p>
+              <button type="button" class="btn-order" data-item="Matcha Cloud Latte">
+                Add to order
+              </button>
+            </div>
+          </article>
+
+          <!-- CARD 4 -->
+          <article class="menu-card" aria-label="Code Crunch Croissant" role="listitem">
+            <img
+              src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=80"
+              alt="A golden, flaky butter croissant on a slate board, filled with almond cream and dusted with powdered sugar"
+            />
+            <div class="card-body">
+              <h3>Code Crunch Croissant</h3>
+              <p class="desc">Buttery layers of all-day flakiness — almond or plain.</p>
+              <p class="amount">$3.50</p>
+              <button type="button" class="btn-order" data-item="Code Crunch Croissant">
+                Add to order
+              </button>
+            </div>
+          </article>
+
+          <!-- CARD 5 -->
+          <article class="menu-card" aria-label="Byte-Size Brownie" role="listitem">
+            <img
+              src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&q=80"
+              alt="Stack of three fudgy dark chocolate brownies with a shiny glaze on parchment paper"
+            />
+            <div class="card-body">
+              <h3>Byte-Size Brownie</h3>
+              <p class="desc">Dense, fudgy, 70% dark chocolate — small but mighty.</p>
+              <p class="amount">$2.75</p>
+              <button type="button" class="btn-order" data-item="Byte-Size Brownie">
+                Add to order
+              </button>
+            </div>
+          </article>
+
+          <!-- CARD 6 -->
+          <article class="menu-card" aria-label="Cascara Fizz" role="listitem">
+            <img
+              src="https://images.unsplash.com/photo-1497534446932-c925b458314e?w=400&q=80"
+              alt="A fizzy reddish-pink cascara drink in a highball glass with ice and a dried orange wheel garnish"
+            />
+            <div class="card-body">
+              <h3>Cascara Fizz</h3>
+              <p class="desc">Sparkling coffee-cherry tea — lightly sweet, wildly unique.</p>
+              <p class="amount">$5.00</p>
+              <button type="button" class="btn-order" data-item="Cascara Fizz">
+                Add to order
+              </button>
+            </div>
+          </article>
+
+        </div><!-- /#menu-grid -->
+      </section>
+
+      <!-- ── CONTACT ── -->
+      <section id="contact" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Get in Touch</h2>
+        <p>Got a catering enquiry, feedback, or just want to say hi? We'd love to hear from you.</p>
+
+        <form action="#" method="post" novalidate aria-label="Contact form">
+
+          <div class="form-group">
+            <label for="name">Full Name <span aria-hidden="true">*</span></label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              autocomplete="name"
+              placeholder="Jane Smith"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address <span aria-hidden="true">*</span></label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              placeholder="jane@example.com"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message <span aria-hidden="true">*</span></label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              placeholder="Your message here…"
+              required
+              aria-required="true"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary">Send Message</button>
+
+        </form>
+      </section>
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+      <p>
+        &copy; <time datetime="2026">2026</time> Brew &amp; Byte Café.
+        All rights reserved.
+      </p>
+      <address>
+        42 Silicon Lane, Tech Quarter · 
+        <a href="mailto:hello@brewandbyte.coffee">hello@brewandbyte.coffee</a>
+      </address>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
